@@ -65,6 +65,15 @@ public class FoodOrderingService {
         return choice;
     }
 
+    public String summarizeOrder(Order order) {
+        if (validateOrder(order)) {
+            order.printSummary();
+            return InputCommands.EXIT_COMMAND;
+        } else {
+            return InputCommands.RESTART_COMMAND;
+        }
+    }
+
     private <T> String askForSingleMeal(Order order, List<T> items) {
         String choice = null;
         boolean properChoice = false;
@@ -105,15 +114,6 @@ public class FoodOrderingService {
         System.out.println("Press ["+InputCommands.SKIP_COMMAND.toUpperCase()+"] if you want to SKIP this dish.");
         System.out.println("Press ["+InputCommands.RESTART_COMMAND.toUpperCase()+"] if you want to RESTART order from the beginning.");
         System.out.println("Press ["+InputCommands.EXIT_COMMAND.toUpperCase()+"] if you want to EXIT without ordering meal.");
-    }
-
-    public String summarizeOrder(Order order) {
-        if (validateOrder(order)) {
-            order.printSummary();
-            return InputCommands.EXIT_COMMAND;
-        } else {
-            return InputCommands.RESTART_COMMAND;
-        }
     }
 
     private boolean validateOrder(Order order) {
